@@ -2,7 +2,7 @@ import firebase from 'firebase';
 import M from 'materialize-css';
 
 
-export async function agregarElemento(data) {
+export async function agregarElemento(data) { //CREATE
     try{
         let elementoAgregado = await firebase.firestore().collection('todo').add(data);
         console.log(elementoAgregado.id);
@@ -15,7 +15,7 @@ export async function agregarElemento(data) {
     }
 }
 
-export async function obtenerElementos(){
+export async function obtenerElementos(){ //READ
     try{
         let elementos = await firebase.firestore().collection('todo').get();
         let docs = elementos.docs;
@@ -40,7 +40,7 @@ export async function obtenerElementos(){
 
 }
 
-export async function actualizarElemento(toDo){
+export async function actualizarElemento(toDo){ //UPDATE
     try{
         let id = toDo.id;
         //Se elimina la propiedad id
@@ -58,7 +58,7 @@ export async function actualizarElemento(toDo){
     }
 }
 
-export async function eliminarElemento(toDo){
+export async function eliminarElemento(toDo){ //DELETE
     try{
         await firebase.firestore().collection('todo').doc(toDo.id).delete()
         M.toast({ html: 'Elemento Eliminado.', classes: 'green darken-3' });
